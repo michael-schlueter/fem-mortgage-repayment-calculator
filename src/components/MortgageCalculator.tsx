@@ -1,3 +1,5 @@
+import MortgageInput from "./MortgageInput";
+
 export default function MortgageCalculator() {
   return (
     <section className="w-full bg-white py-8 px-6 lg:p-10 grid gap-6 md:gap-10">
@@ -11,30 +13,30 @@ export default function MortgageCalculator() {
       </header>
       <form className="grid gap-6">
         <div className="grid gap-3">
-          <label className="text-slate-700 text-base" htmlFor="amount">
+          <label className="text-slate-700 text-base" htmlFor="mortgageAmount">
             Mortgage Amount
           </label>
-          <input id="amount" name="amount" type="number" />
+          <MortgageInput orientation="left" id="mortgageAmount" unit="£" />
         </div>
-        <div className="grid gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           <div className="grid gap-3">
-            <label className="text-slate-700 text-base" htmlFor="term">
+            <label className="text-slate-700 text-base" htmlFor="mortgageTerm">
               Mortgage Term
             </label>
-            <input id="term" name="term" type="number" />
+            <MortgageInput orientation="right" id="mortageTerm" unit="years" />
           </div>
           <div className="grid gap-3">
-            <label className="text-slate-700 text-base" htmlFor="interest-rate">
+            <label className="text-slate-700 text-base" htmlFor="mortgageRate">
               Interest Rate
             </label>
-            <input id="interest-rate" name="interest-rate" type="number" />
+            <MortgageInput orientation="right" id="mortgageRate" unit="%" />
           </div>
         </div>
         <fieldset className="grid gap-3">
           <div>
             <legend className="text-slate-700 text-base">Mortgage Type</legend>
           </div>
-          <div className="border border-slate-500 rounded-[4px] py-3 px-4">
+          <div className="border border-slate-500 flex items-center gap-4 rounded-[4px] py-3 px-4">
             <input
               type="radio"
               id="repayment"
@@ -44,13 +46,13 @@ export default function MortgageCalculator() {
               checked
             />
             <label
-              className="text-slate-900 text-lg font-bold ml-4"
+              className="text-slate-900 text-lg font-bold"
               htmlFor="repayment"
             >
               Repayment
             </label>
           </div>
-          <div className="border border-slate-500 rounded-[4px] py-3 px-4">
+          <div className="border border-slate-500 flex items-center gap-4 rounded-[4px] py-3 px-4">
             <input
               type="radio"
               id="interest-only"
@@ -59,7 +61,7 @@ export default function MortgageCalculator() {
               className="w-5 h-5"
             />
             <label
-              className="text-slate-900 text-lg font-bold ml-4"
+              className="text-slate-900 text-lg font-bold"
               htmlFor="interest-only"
             >
               Interest Only
