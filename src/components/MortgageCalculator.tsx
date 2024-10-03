@@ -1,4 +1,5 @@
 import MortgageInput from "./MortgageInput";
+import MortgageTypeRadioGroup from "./RadioGroup";
 
 export default function MortgageCalculator() {
   return (
@@ -32,42 +33,7 @@ export default function MortgageCalculator() {
             <MortgageInput orientation="right" id="mortgageRate" unit="%" />
           </div>
         </div>
-        <fieldset className="grid gap-3">
-          <div>
-            <legend className="text-slate-700 text-base">Mortgage Type</legend>
-          </div>
-          <div className="border border-slate-500 flex items-center gap-4 rounded-[4px] py-3 px-4">
-            <input
-              type="radio"
-              id="repayment"
-              name="mortage-type"
-              value="repayment"
-              className="w-5 h-5"
-              checked
-            />
-            <label
-              className="text-slate-900 text-lg font-bold"
-              htmlFor="repayment"
-            >
-              Repayment
-            </label>
-          </div>
-          <div className="border border-slate-500 flex items-center gap-4 rounded-[4px] py-3 px-4">
-            <input
-              type="radio"
-              id="interest-only"
-              name="mortage-type"
-              value="interest-only"
-              className="w-5 h-5"
-            />
-            <label
-              className="text-slate-900 text-lg font-bold"
-              htmlFor="interest-only"
-            >
-              Interest Only
-            </label>
-          </div>
-        </fieldset>
+        <MortgageTypeRadioGroup />
         <button className="h-14 text-lg font-bold bg-lime rounded-full flex gap-3 justify-center items-center md:max-w-[314px]">
           <img src="./public/assets/images/icon-calculator.svg" />
           Calculate Payments
