@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .custom-radio {
-  @apply appearance-none rounded-full border-2 border-[#D8D82F] checked:border-[#D8D82F];
+  @apply appearance-none rounded-full border-2 border-slate-500 checked:border-lime;
 }
 .custom-radio:checked {
   background-image: url("data:image/svg+xml,%3csvg viewBox='0 0 16 16' fill='%23D8D82F' xmlns='http://www.w3.org/2000/svg'%3e%3ccircle cx='8' cy='8' r='5.5'/%3e%3c/svg%3e");
