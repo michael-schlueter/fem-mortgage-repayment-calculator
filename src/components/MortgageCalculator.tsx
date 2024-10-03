@@ -1,17 +1,11 @@
+import Header from "./Header";
 import MortgageInput from "./MortgageInput";
 import MortgageTypeRadioGroup from "./RadioGroup";
 
 export default function MortgageCalculator() {
   return (
     <section className="w-full bg-white py-8 px-6 lg:p-10 grid gap-6 md:gap-10">
-      <header className="flex flex-col gap-2 md:flex-row md:justify-between">
-        <h1 className="text-xl text-slate-900 font-bold">
-          Mortgage Calculator
-        </h1>
-        <p className="text-slate-700 text-base underline underline-offset-2">
-          Clear All
-        </p>
-      </header>
+      <Header />
       <form className="grid gap-6">
         <div className="grid gap-3">
           <label className="text-slate-700 text-base" htmlFor="mortgageAmount">
