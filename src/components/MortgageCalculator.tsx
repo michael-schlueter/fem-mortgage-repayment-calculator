@@ -4,7 +4,7 @@ import MortgageTypeRadioGroup from "./RadioGroup";
 
 export default function MortgageCalculator() {
   return (
-    <section className="w-full bg-white py-8 px-6 lg:p-10 grid gap-6 md:gap-10">
+    <section className="w-full bg-white py-8 px-6 lg:p-10 grid gap-6 md:gap-10 md:rounded-t-3xl lg:rounded-none lg:rounded-s-3xl">
       <Header />
       <form className="grid gap-6">
         <div className="grid gap-3">
