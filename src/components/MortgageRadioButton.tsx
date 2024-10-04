@@ -8,7 +8,7 @@ export default function MortgageRadioButton({
   label,
 }: MortgageRadioButtonProps) {
   return (
-    <div className="border border-slate-500 has-[:checked]:border-lime has-[:checked]:bg-lime/15 hover:border-lime  flex items-center gap-4 rounded-[4px] py-3 px-4">
+    <div className="border border-slate-500 has-[:checked]:border-lime has-[:checked]:bg-lime/15 hover:border-lime flex items-center gap-4 rounded-[4px] py-3 px-4 transition-colors duration-300">
       <input
         type="radio"
         id={mortgageType}

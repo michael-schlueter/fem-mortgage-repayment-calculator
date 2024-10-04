@@ -28,7 +28,7 @@ export default function MortgageCalculator() {
           </div>
         </div>
         <MortgageTypeRadioGroup />
-        <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px]">
+        <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300">
           <img src="./public/assets/images/icon-calculator.svg" />
           Calculate Payments
         </button>
