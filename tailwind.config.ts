@@ -7,6 +7,7 @@ export default {
       red: "#D73328",
       white: "#FFFFFF",
       lime: "#D8D82F",
+      black: "#000000",
       slate: {
         "100": "#E4F4FD",
         "300": "#9ABED5",
