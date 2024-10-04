@@ -18,7 +18,7 @@ export default function MortgageCalculator() {
             <label className="text-slate-700 text-base" htmlFor="mortgageTerm">
               Mortgage Term
             </label>
-            <MortgageInput orientation="right" id="mortageTerm" unit="years" />
+            <MortgageInput orientation="right" id="mortgageTerm" unit="years" />
           </div>
           <div className="grid gap-3">
             <label className="text-slate-700 text-base" htmlFor="mortgageRate">
