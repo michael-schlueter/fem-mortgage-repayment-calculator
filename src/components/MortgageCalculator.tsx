@@ -14,11 +14,41 @@ export default function MortgageCalculator({
   setTotalRepayment,
 }: MortgageCalculatorProps) {
   const [mortgageAmount, setMortgageAmount] = useState("");
+  const [mortgageAmountError, setMortgageAmountError] = useState("");
   const [mortgageTerm, setMortageTerm] = useState("");
+  const [mortgageTermError, setMortageTermError] = useState("");
   const [mortgageRate, setMortgageRate] = useState("");
+  const [mortgageRateError, setMortgageRateError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    if (
+      mortgageAmount === "" ||
+      mortgageTerm === "" ||
+      mortgageRate === "" ||
+      parseFloat(mortgageAmount) === 0 ||
+      parseFloat(mortgageTerm) === 0
+    ) {
+      if (mortgageAmount === "") {
+        setMortgageAmountError("This field is required");
+      }
+      if (mortgageTerm === "") {
+        setMortageTermError("This field is required");
+      }
+      if (mortgageRate === "") {
+        setMortgageRateError("This field is required");
+      }
+
+      if (parseFloat(mortgageAmount) === 0) {
+        setMortgageAmountError("Please enter a number greater than zero");
+      }
+
+      if (parseFloat(mortgageTerm) === 0) {
+        setMortageTermError("Please enter a number greater than zero");
+      }
+      return;
+    }
+
     const monthlyPayment = calculateMonthlyPayment(
       parseFloat(mortgageAmount),
       parseFloat(mortgageTerm),
@@ -55,7 +85,12 @@ export default function MortgageCalculator({
             unit="£"
             value={mortgageAmount}
             setValue={setMortgageAmount}
+            resetError={setMortgageAmountError}
+            error={mortgageAmountError}
           />
+          {mortgageAmountError && (
+            <p className="text-sm text-red">{mortgageAmountError}</p>
+          )}
         </div>
         <div className="grid gap-6 md:grid-cols-2">
           <div className="grid gap-3">
@@ -68,7 +103,12 @@ export default function MortgageCalculator({
               unit="years"
               value={mortgageTerm}
               setValue={setMortageTerm}
+              resetError={setMortageTermError}
+              error={mortgageTermError}
             />
+            {mortgageTermError && (
+              <p className="text-sm text-red">{mortgageTermError}</p>
+            )}
           </div>
           <div className="grid gap-3">
             <label className="text-slate-700 text-base" htmlFor="mortgageRate">
@@ -80,7 +120,12 @@ export default function MortgageCalculator({
               unit="%"
               value={mortgageRate}
               setValue={setMortgageRate}
+              resetError={setMortgageRateError}
+              error={mortgageRateError}
             />
+            {mortgageRateError && (
+              <p className="text-sm text-red">{mortgageRateError}</p>
+            )}
           </div>
         </div>
         <MortgageTypeRadioGroup />
