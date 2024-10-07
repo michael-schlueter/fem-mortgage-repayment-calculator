@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="bg-slate-100 w-full lg:min-h-screen lg:flex justify-center lg:items-center">
-      <main className="w-full max-w-[1008px] grid md:p-10 lg:p-0 lg:grid-cols-2">
+      <main className="w-full max-w-[1008px] grid md:p-10 lg:p-0 lg:grid-cols-2 md:drop-shadow-custom">
         <MortgageCalculator
           setMonthlyPayment={setMonthlyRepayment}
           setTotalRepayment={setTotalRepayment}

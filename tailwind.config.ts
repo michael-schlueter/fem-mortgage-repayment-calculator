@@ -27,6 +27,9 @@ export default {
       fontFamily: {
         "plus-jakarta-sans": ["Plus Jakarta Sans", "sans-serif"],
       },
+      dropShadow: {
+        'custom': "0 32px 64px rgba(19, 48, 65, 0.10)",
+      },
     },
   },
   plugins: [],
