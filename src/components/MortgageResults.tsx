@@ -1,7 +1,11 @@
 import Results from "./Results";
 
-export default function MortgageResults() {
+type MortgageResultsProps = {
+  monthlyPayment: number;
+}
+
+export default function MortgageResults({ monthlyPayment }: MortgageResultsProps) {
   return (
-    <Results />
+    <Results monthlyPayment={monthlyPayment} />
   )
 }

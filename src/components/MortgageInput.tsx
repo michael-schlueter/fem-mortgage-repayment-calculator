@@ -5,12 +5,16 @@ type MortgageInputProps = {
   orientation: "left" | "right";
   id: string;
   unit: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>
 };
 
 export default function MortgageInput({
   orientation,
   id,
   unit,
+  value,
+  setValue,
 }: MortgageInputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
@@ -25,9 +29,11 @@ export default function MortgageInput({
           </div>
           <input
             type="number"
+            value={value}
             id={id}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
+            onChange={(e) => setValue(e.target.value)}
             required
             className="flex-grow px-4 py-[12.5px] text-lg font-bold text-slate-900 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
           />
@@ -36,7 +42,9 @@ export default function MortgageInput({
         <>
           <input
             type="number"
+            value={value}
             id={id}
+            onChange={(e) => setValue(e.target.value)}
             required
             className="min-w-0 flex-grow px-4 py-[12.5px] text-lg font-bold text-slate-900 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none peer"
           />
