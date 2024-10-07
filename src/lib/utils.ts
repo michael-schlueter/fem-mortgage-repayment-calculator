@@ -11,6 +11,10 @@ export function calculateMonthlyPayment(
   mortgageTerm: number,
   mortgageRate: number
 ) {
+  if (mortgageRate === 0) {
+    return mortgageAmount / (mortgageTerm * 12);
+  }
+
   const monthlyInterestRate = mortgageRate / 100 / 12;
   const numberOfPayments = mortgageTerm * 12;
   const numerator =
@@ -25,6 +29,10 @@ export function calculateTotalRepayment(
   mortgageTerm: number,
   mortgageRate: number
 ) {
+  if (mortgageRate === 0) {
+    return mortgageAmount;
+  }
+
   return (
     calculateMonthlyPayment(mortgageAmount, mortgageTerm, mortgageRate) *
     12 *
