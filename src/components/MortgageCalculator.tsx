@@ -24,14 +24,26 @@ export default function MortgageCalculator({
       parseFloat(mortgageTerm),
       parseFloat(mortgageRate)
     );
-    const totalRepayment = calculateTotalRepayment(parseFloat(mortgageAmount), parseFloat(mortgageTerm), parseFloat(mortgageRate));
+    const totalRepayment = calculateTotalRepayment(
+      parseFloat(mortgageAmount),
+      parseFloat(mortgageTerm),
+      parseFloat(mortgageRate)
+    );
     setMonthlyPayment(monthlyPayment);
     setTotalRepayment(totalRepayment);
   };
 
+  const clearForm = () => {
+    setMortgageAmount("");
+    setMortageTerm("");
+    setMortgageRate("");
+    setMonthlyPayment(0);
+    setTotalRepayment(0);
+  };
+
   return (
     <section className="w-full bg-white py-8 px-6 lg:p-10 grid gap-6 md:gap-10 md:rounded-t-3xl lg:rounded-none lg:rounded-s-3xl">
-      <Header />
+      <Header onClearForm={clearForm} />
       <form className="grid gap-6" onSubmit={handleSubmit}>
         <div className="grid gap-3">
           <label className="text-slate-700 text-base" htmlFor="mortgageAmount">
