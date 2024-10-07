@@ -1,11 +1,13 @@
 type MortgageRadioButtonProps = {
   mortgageType: "repayment" | "interest-only";
   label: "Repayment" | "Interest Only";
+  defaultChecked: boolean;
 };
 
 export default function MortgageRadioButton({
   mortgageType,
   label,
+  defaultChecked,
 }: MortgageRadioButtonProps) {
   return (
     <label
@@ -18,7 +20,7 @@ export default function MortgageRadioButton({
         name="mortage-type"
         value={mortgageType}
         className="custom-radio w-5 h-5"
-        checked
+        defaultChecked={defaultChecked}
       />
       <span className="text-slate-900 text-lg font-bold">{label}</span>
     </label>
