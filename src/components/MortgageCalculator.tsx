@@ -40,11 +40,11 @@ export default function MortgageCalculator({
       }
 
       if (parseFloat(mortgageAmount) === 0) {
-        setMortgageAmountError("Please enter a number greater than zero");
+        setMortgageAmountError("Must be greater than zero");
       }
 
       if (parseFloat(mortgageTerm) === 0) {
-        setMortageTermError("Please enter a number greater than zero");
+        setMortageTermError("Must be greater than zero");
       }
       return;
     }
@@ -93,7 +93,7 @@ export default function MortgageCalculator({
           )}
         </div>
         <div className="grid gap-6 md:grid-cols-2">
-          <div className="grid gap-3">
+          <div className="flex flex-col gap-3">
             <label className="text-slate-700 text-base" htmlFor="mortgageTerm">
               Mortgage Term
             </label>
