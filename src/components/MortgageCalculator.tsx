@@ -2,14 +2,16 @@ import { useState } from "react";
 import Header from "./Header";
 import MortgageInput from "./MortgageInput";
 import MortgageTypeRadioGroup from "./RadioGroup";
-import { calculateMonthlyPayment } from "../lib/utils";
+import { calculateMonthlyPayment, calculateTotalRepayment } from "../lib/utils";
 
 type MortgageCalculatorProps = {
   setMonthlyPayment: React.Dispatch<React.SetStateAction<number>>;
+  setTotalRepayment: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function MortgageCalculator({
   setMonthlyPayment,
+  setTotalRepayment,
 }: MortgageCalculatorProps) {
   const [mortgageAmount, setMortgageAmount] = useState("");
   const [mortgageTerm, setMortageTerm] = useState("");
@@ -22,8 +24,9 @@ export default function MortgageCalculator({
       parseFloat(mortgageTerm),
       parseFloat(mortgageRate)
     );
-    // const totalRepayment = calculateTotalRepayment(parseFloat(mortgageAmount), parseFloat(mortgageTerm), parseFloat(mortgageRate));
+    const totalRepayment = calculateTotalRepayment(parseFloat(mortgageAmount), parseFloat(mortgageTerm), parseFloat(mortgageRate));
     setMonthlyPayment(monthlyPayment);
+    setTotalRepayment(totalRepayment);
   };
 
   return (

@@ -1,10 +1,14 @@
 import { formatCurrency } from "../lib/utils";
 
 type ResultsProps = {
-  monthlyPayment: number;
+  monthlyRepayment: number;
+  totalRepayment: number;
 };
 
-export default function Results({ monthlyPayment }: ResultsProps) {
+export default function Results({
+  monthlyRepayment,
+  totalRepayment,
+}: ResultsProps) {
   return (
     <div className="grid gap-6">
       <div className="grid gap-4">
@@ -19,14 +23,16 @@ export default function Results({ monthlyPayment }: ResultsProps) {
         <div className="grid gap-2 pb-4 md:pb-8 border-b border-slate-300/25">
           <p className="text-slate-300 text-base">Your monthly payments</p>
           <span className="text-lime text-2xl font-bold">
-            {formatCurrency(monthlyPayment)}
+            {formatCurrency(monthlyRepayment)}
           </span>
         </div>
         <div className="pt-4 md:pt-8 grid gap-2">
           <p className="text-slate-300 text-base">
             Total you'll repay over the term
           </p>
-          <span className="text-white text-xl font-bold">£539,322.94</span>
+          <span className="text-white text-xl font-bold">
+            {formatCurrency(totalRepayment)}
+          </span>
         </div>
       </div>
     </div>

@@ -20,11 +20,23 @@ export function calculateMonthlyPayment(
   return monthlyPayment;
 }
 
+export function calculateTotalRepayment(
+  mortgageAmount: number,
+  mortgageTerm: number,
+  mortgageRate: number
+) {
+  return (
+    calculateMonthlyPayment(mortgageAmount, mortgageTerm, mortgageRate) *
+    12 *
+    25
+  );
+}
+
 export function formatCurrency(amount: number): string {
-  return new Intl.NumberFormat('en-US', {
-    style: 'currency',
-    currency: 'GBP',
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "GBP",
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
+    maximumFractionDigits: 2,
   }).format(amount);
 }
