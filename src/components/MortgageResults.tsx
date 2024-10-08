@@ -2,22 +2,22 @@ import EmptyResults from "./EmptyResults";
 import Results from "./Results";
 
 type MortgageResultsProps = {
-  monthlyRepayment: number;
-  totalRepayment: number;
+  monthlyPayment: number;
+  totalPayment: number;
 };
 
 export default function MortgageResults({
-  monthlyRepayment,
-  totalRepayment,
+  monthlyPayment,
+  totalPayment,
 }: MortgageResultsProps) {
   return (
     <>
-      {monthlyRepayment === 0 ? (
+      {monthlyPayment === 0 ? (
         <EmptyResults />
       ) : (
         <Results
-          monthlyRepayment={monthlyRepayment}
-          totalRepayment={totalRepayment}
+          monthlyPayment={monthlyPayment}
+          totalPayment={totalPayment}
         />
       )}
     </>

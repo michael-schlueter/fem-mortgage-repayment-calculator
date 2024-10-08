@@ -6,7 +6,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function calculateMonthlyPayment(
+export function calculateMonthlyRepayment(
   mortgageAmount: number,
   mortgageTerm: number,
   mortgageRate: number
@@ -34,10 +34,32 @@ export function calculateTotalRepayment(
   }
 
   return (
-    calculateMonthlyPayment(mortgageAmount, mortgageTerm, mortgageRate) *
+    calculateMonthlyRepayment(mortgageAmount, mortgageTerm, mortgageRate) *
     12 *
     25
   );
+}
+
+export function calculateMonthlyInterestPayment(
+  mortgageAmount: number,
+  mortgageRate: number
+): number {
+  const monthlyInterestRate = mortgageRate / 12 / 100;
+  const monthlyInterestPayment = mortgageAmount * monthlyInterestRate;
+  return monthlyInterestPayment;
+}
+
+export function calculateTotalInterestRepayment(
+  mortgageAmount: number,
+  mortgageTerm: number,
+  mortgageRate: number
+): number {
+  const monthlyInterestPayment = calculateMonthlyInterestPayment(
+    mortgageAmount,
+    mortgageRate
+  );
+  const totalInterestPayment = monthlyInterestPayment * mortgageTerm * 12;
+  return totalInterestPayment;
 }
 
 export function formatCurrency(amount: number): string {

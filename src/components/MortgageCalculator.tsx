@@ -2,16 +2,21 @@ import { useState } from "react";
 import Header from "./Header";
 import MortgageInput from "./MortgageInput";
 import MortgageTypeRadioGroup from "./RadioGroup";
-import { calculateMonthlyPayment, calculateTotalRepayment } from "../lib/utils";
+import {
+  calculateMonthlyInterestPayment,
+  calculateMonthlyRepayment,
+  calculateTotalInterestRepayment,
+  calculateTotalRepayment,
+} from "../lib/utils";
 
 type MortgageCalculatorProps = {
   setMonthlyPayment: React.Dispatch<React.SetStateAction<number>>;
-  setTotalRepayment: React.Dispatch<React.SetStateAction<number>>;
+  setTotalPayment: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export default function MortgageCalculator({
   setMonthlyPayment,
-  setTotalRepayment,
+  setTotalPayment,
 }: MortgageCalculatorProps) {
   const [mortgageAmount, setMortgageAmount] = useState("");
   const [mortgageAmountError, setMortgageAmountError] = useState("");
@@ -56,18 +61,25 @@ export default function MortgageCalculator({
       return;
     }
 
-    const monthlyPayment = calculateMonthlyPayment(
-      parseFloat(mortgageAmount),
-      parseFloat(mortgageTerm),
-      parseFloat(mortgageRate)
-    );
-    const totalRepayment = calculateTotalRepayment(
-      parseFloat(mortgageAmount),
-      parseFloat(mortgageTerm),
-      parseFloat(mortgageRate)
-    );
-    setMonthlyPayment(monthlyPayment);
-    setTotalRepayment(totalRepayment);
+    if (mortgageType === "repayment") {
+      const monthlyPayment = calculateMonthlyRepayment(
+        parseFloat(mortgageAmount),
+        parseFloat(mortgageTerm),
+        parseFloat(mortgageRate)
+      );
+      const totalRepayment = calculateTotalRepayment(
+        parseFloat(mortgageAmount),
+        parseFloat(mortgageTerm),
+        parseFloat(mortgageRate)
+      );
+      setMonthlyPayment(monthlyPayment);
+      setTotalPayment(totalRepayment);
+    } else {
+      const monthlyInterestPayment = calculateMonthlyInterestPayment(parseFloat(mortgageAmount), parseFloat(mortgageRate));
+      const totalInterestPayment = calculateTotalInterestRepayment(parseFloat(mortgageAmount), parseFloat(mortgageTerm), parseFloat(mortgageRate));
+      setMonthlyPayment(monthlyInterestPayment);
+      setTotalPayment(totalInterestPayment);
+    }
   };
 
   const clearForm = () => {
@@ -76,7 +88,7 @@ export default function MortgageCalculator({
     setMortgageRate("");
     setMortgageType("");
     setMonthlyPayment(0);
-    setTotalRepayment(0);
+    setTotalPayment(0);
   };
 
   return (
@@ -136,7 +148,12 @@ export default function MortgageCalculator({
             )}
           </div>
         </div>
-        <MortgageTypeRadioGroup mortgageType={mortgageType} setMortgageType={setMortgageType} setMortgageTypeError={setMortgageTypeError} mortgageTypeError={mortgageTypeError} />
+        <MortgageTypeRadioGroup
+          mortgageType={mortgageType}
+          setMortgageType={setMortgageType}
+          setMortgageTypeError={setMortgageTypeError}
+          mortgageTypeError={mortgageTypeError}
+        />
         <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300">
           <img src="./public/assets/images/icon-calculator.svg" />
           Calculate Payments

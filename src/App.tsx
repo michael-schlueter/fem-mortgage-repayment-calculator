@@ -3,21 +3,21 @@ import MortgageCalculator from "./components/MortgageCalculator";
 import MortgageResults from "./components/MortgageResults";
 
 function App() {
-  const [monthlyRepayment, setMonthlyRepayment] = useState(0);
-  const [totalRepayment, setTotalRepayment] = useState(0);
+  const [monthlyPayment, setMonthlyPayment] = useState(0);
+  const [totalPayment, setTotalPayment] = useState(0);
 
   return (
     <div className="bg-slate-100 w-full lg:min-h-screen lg:flex justify-center lg:items-center">
       <main className="w-full max-w-[1008px] grid md:p-10 lg:p-0 lg:grid-cols-2 md:drop-shadow-custom">
         <MortgageCalculator
-          setMonthlyPayment={setMonthlyRepayment}
-          setTotalRepayment={setTotalRepayment}
+          setMonthlyPayment={setMonthlyPayment}
+          setTotalPayment={setTotalPayment}
         />
         <div className="w-full bg-transparent lg:bg-white lg:rounded-e-3xl">
           <div className="w-full h-full bg-slate-900 py-8 px-6 md:rounded-b-3xl lg:rounded-none lg:rounded-e-3xl lg:rounded-es-[80px] md:p-10">
             <MortgageResults
-              monthlyRepayment={monthlyRepayment}
-              totalRepayment={totalRepayment}
+              monthlyPayment={monthlyPayment}
+              totalPayment={totalPayment}
             />
           </div>
         </div>
