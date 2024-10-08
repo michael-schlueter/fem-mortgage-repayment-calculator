@@ -26,6 +26,7 @@ export default function MortgageCalculator({
   const [mortgageRateError, setMortgageRateError] = useState("");
   const [mortgageType, setMortgageType] = useState("");
   const [mortgageTypeError, setMortgageTypeError] = useState("");
+  const [resultsAnnouncement, setResultsAnnouncement] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -74,6 +75,9 @@ export default function MortgageCalculator({
       );
       setMonthlyPayment(monthlyPayment);
       setTotalPayment(totalRepayment);
+      setResultsAnnouncement(
+        `The monthly payment is ${monthlyPayment} and the total payment is ${totalRepayment}. This is repayment.`
+      );
     } else {
       const monthlyInterestPayment = calculateMonthlyInterestPayment(
         parseFloat(mortgageAmount),
@@ -86,6 +90,10 @@ export default function MortgageCalculator({
       );
       setMonthlyPayment(monthlyInterestPayment);
       setTotalPayment(totalInterestPayment);
+
+      setResultsAnnouncement(
+        `The monthly payment is ${monthlyInterestPayment} and the total payment is ${totalInterestPayment}. This is interest-only.`
+      );
     }
   };
 
@@ -121,7 +129,13 @@ export default function MortgageCalculator({
             errorId="mortgageAmountError"
           />
           {mortgageAmountError && (
-            <span role="alert" id="mortgageAmountError" className="text-sm text-red">{mortgageAmountError}</span>
+            <span
+              role="alert"
+              id="mortgageAmountError"
+              className="text-sm text-red"
+            >
+              {mortgageAmountError}
+            </span>
           )}
         </div>
         <div className="grid gap-6 md:grid-cols-2">
@@ -140,7 +154,13 @@ export default function MortgageCalculator({
               errorId="mortgageTermError"
             />
             {mortgageTermError && (
-              <span role="alert" id="mortgageTermError" className="text-sm text-red">{mortgageTermError}</span>
+              <span
+                role="alert"
+                id="mortgageTermError"
+                className="text-sm text-red"
+              >
+                {mortgageTermError}
+              </span>
             )}
           </div>
           <div className="flex flex-col gap-3">
@@ -158,7 +178,13 @@ export default function MortgageCalculator({
               errorId="mortgageRateError"
             />
             {mortgageRateError && (
-              <span role="alert" id="mortgageRateError" className="text-sm text-red">{mortgageRateError}</span>
+              <span
+                role="alert"
+                id="mortgageRateError"
+                className="text-sm text-red"
+              >
+                {mortgageRateError}
+              </span>
             )}
           </div>
         </div>
@@ -168,6 +194,9 @@ export default function MortgageCalculator({
           setMortgageTypeError={setMortgageTypeError}
           mortgageTypeError={mortgageTypeError}
         />
+        <div className="sr-only" aria-live="polite">
+          {resultsAnnouncement}
+        </div>
         <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus:ring-lime">
           <img src="./public/assets/images/icon-calculator.svg" />
           Calculate Payments
