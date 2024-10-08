@@ -20,63 +20,68 @@ export default function MortgageCalculator({
 }: MortgageCalculatorProps) {
   const [mortgageAmount, setMortgageAmount] = useState("");
   const [mortgageAmountError, setMortgageAmountError] = useState("");
-  const [mortgageTerm, setMortageTerm] = useState("");
-  const [mortgageTermError, setMortageTermError] = useState("");
+  const [mortgageTerm, setMortgageTerm] = useState("");
+  const [mortgageTermError, setMortgageTermError] = useState("");
   const [mortgageRate, setMortgageRate] = useState("");
   const [mortgageRateError, setMortgageRateError] = useState("");
   const [mortgageType, setMortgageType] = useState("");
   const [mortgageTypeError, setMortgageTypeError] = useState("");
   const [resultsAnnouncement, setResultsAnnouncement] = useState("");
 
+  const validateInputs = () => {
+    let isValid = true;
+    if (mortgageAmount === "") {
+      setMortgageAmountError("Mortgage amount is required.");
+      isValid = false;
+    }
+    if (mortgageTerm === "") {
+      setMortgageTermError("Mortgage term is required.");
+      isValid = false;
+    }
+    if (mortgageRate === "") {
+      setMortgageRateError("Mortgage rate is required.");
+      isValid = false;
+    }
+    if (mortgageType === "") {
+      setMortgageTypeError("Mortgage type is required.");
+      isValid = false;
+    }
+    if (parseFloat(mortgageAmount) === 0) {
+      setMortgageAmountError("Mortgage amount must be greater than zero.");
+      isValid = false;
+    }
+    if (parseFloat(mortgageTerm) === 0) {
+      setMortgageTermError("Mortgage term must be greater than zero.");
+      isValid = false;
+    }
+    if (parseFloat(mortgageRate) === 0) {
+      setMortgageRateError("Mortgage rate must be greater than zero.");
+      isValid = false;
+    }
+
+    return isValid;
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (
-      mortgageAmount === "" ||
-      mortgageTerm === "" ||
-      mortgageRate === "" ||
-      mortgageType === "" ||
-      parseFloat(mortgageAmount) === 0 ||
-      parseFloat(mortgageTerm) === 0 ||
-      parseFloat(mortgageRate) === 0
-    ) {
-      if (mortgageAmount === "") {
-        setMortgageAmountError("This field is required");
-      }
-      if (mortgageTerm === "") {
-        setMortageTermError("This field is required");
-      }
-      if (mortgageRate === "") {
-        setMortgageRateError("This field is required");
-      }
-
-      if (mortgageType === "") {
-        setMortgageTypeError("This field is required");
-      }
-
-      if (parseFloat(mortgageAmount) === 0) {
-        setMortgageAmountError("Must be greater than zero");
-      }
-
-      if (parseFloat(mortgageTerm) === 0) {
-        setMortageTermError("Must be greater than zero");
-      }
-
-      if (parseFloat(mortgageRate) === 0) {
-        setMortgageRateError("Must be greater than zero");
-      }
+    if (!validateInputs()) {
       return;
     }
 
+    const parsedMortgageAmount = parseFloat(mortgageAmount);
+    const parsedMortgageTerm = parseFloat(mortgageTerm);
+    const parseMortgageRate = parseFloat(mortgageRate);
+
     if (mortgageType === "repayment") {
       const monthlyPayment = calculateMonthlyRepayment(
-        parseFloat(mortgageAmount),
-        parseFloat(mortgageTerm),
-        parseFloat(mortgageRate)
+        parsedMortgageAmount,
+        parsedMortgageTerm,
+        parseMortgageRate
       );
       const totalRepayment = calculateTotalRepayment(
-        parseFloat(mortgageAmount),
-        parseFloat(mortgageTerm),
-        parseFloat(mortgageRate)
+        parsedMortgageAmount,
+        parsedMortgageTerm,
+        parseMortgageRate
       );
       setMonthlyPayment(monthlyPayment);
       setTotalPayment(totalRepayment);
@@ -85,13 +90,13 @@ export default function MortgageCalculator({
       );
     } else {
       const monthlyInterestPayment = calculateMonthlyInterestPayment(
-        parseFloat(mortgageAmount),
-        parseFloat(mortgageRate)
+        parsedMortgageAmount,
+        parseMortgageRate
       );
       const totalInterestPayment = calculateTotalInterestPayment(
-        parseFloat(mortgageAmount),
-        parseFloat(mortgageTerm),
-        parseFloat(mortgageRate)
+        parsedMortgageAmount,
+        parsedMortgageTerm,
+        parseMortgageRate
       );
       setMonthlyPayment(monthlyInterestPayment);
       setTotalPayment(totalInterestPayment);
@@ -104,11 +109,11 @@ export default function MortgageCalculator({
 
   const clearForm = () => {
     setMortgageAmount("");
-    setMortageTerm("");
+    setMortgageTerm("");
     setMortgageRate("");
     setMortgageType("");
     setMortgageAmountError("");
-    setMortageTermError("");
+    setMortgageTermError("");
     setMortgageRateError("");
     setMortgageTypeError("");
     setMonthlyPayment(0);
@@ -153,8 +158,8 @@ export default function MortgageCalculator({
               id="mortgageTerm"
               unit="years"
               value={mortgageTerm}
-              setValue={setMortageTerm}
-              resetError={setMortageTermError}
+              setValue={setMortgageTerm}
+              resetError={setMortgageTermError}
               error={mortgageTermError}
               errorId="mortgageTermError"
             />
