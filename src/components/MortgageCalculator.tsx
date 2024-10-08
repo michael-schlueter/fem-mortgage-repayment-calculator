@@ -19,6 +19,8 @@ export default function MortgageCalculator({
   const [mortgageTermError, setMortageTermError] = useState("");
   const [mortgageRate, setMortgageRate] = useState("");
   const [mortgageRateError, setMortgageRateError] = useState("");
+  const [mortgageType, setMortgageType] = useState("");
+  const [mortgageTypeError, setMortgageTypeError] = useState("");
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -26,6 +28,7 @@ export default function MortgageCalculator({
       mortgageAmount === "" ||
       mortgageTerm === "" ||
       mortgageRate === "" ||
+      mortgageType === "" ||
       parseFloat(mortgageAmount) === 0 ||
       parseFloat(mortgageTerm) === 0
     ) {
@@ -37,6 +40,10 @@ export default function MortgageCalculator({
       }
       if (mortgageRate === "") {
         setMortgageRateError("This field is required");
+      }
+
+      if (mortgageType === "") {
+        setMortgageTypeError("This field is required");
       }
 
       if (parseFloat(mortgageAmount) === 0) {
@@ -110,7 +117,7 @@ export default function MortgageCalculator({
               <p className="text-sm text-red">{mortgageTermError}</p>
             )}
           </div>
-          <div className="grid gap-3">
+          <div className="flex flex-col gap-3">
             <label className="text-slate-700 text-base" htmlFor="mortgageRate">
               Interest Rate
             </label>
@@ -128,7 +135,7 @@ export default function MortgageCalculator({
             )}
           </div>
         </div>
-        <MortgageTypeRadioGroup />
+        <MortgageTypeRadioGroup setMortgageType={setMortgageType} setMortgageTypeError={setMortgageTypeError} mortgageTypeError={mortgageTypeError} />
         <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300">
           <img src="./public/assets/images/icon-calculator.svg" />
           Calculate Payments
