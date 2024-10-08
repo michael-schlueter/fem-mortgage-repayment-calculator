@@ -4,10 +4,12 @@ type MortgageTypeRadioGroupProps = {
   setMortgageType: React.Dispatch<React.SetStateAction<string>>;
   mortgageTypeError?: string;
   setMortgageTypeError: React.Dispatch<React.SetStateAction<string>>;
+  mortgageType: string;
 };
 
 export default function MortgageTypeRadioGroup({
   setMortgageType,
+  mortgageType,
   mortgageTypeError,
   setMortgageTypeError,
 }: MortgageTypeRadioGroupProps) {
@@ -17,14 +19,16 @@ export default function MortgageTypeRadioGroup({
         <legend className="text-slate-700 text-base">Mortgage Type</legend>
       </div>
       <MortgageRadioButton
-        mortgageType="repayment"
+        mortgageTypeId="repayment"
         label="Repayment"
+        mortgageType={mortgageType}
         setMortgageType={setMortgageType}
         setMortgageTypeError={setMortgageTypeError}
       />
       <MortgageRadioButton
-        mortgageType="interest-only"
+        mortgageTypeId="interest-only"
         label="Interest Only"
+        mortgageType={mortgageType}
         setMortgageType={setMortgageType}
         setMortgageTypeError={setMortgageTypeError}
       />
