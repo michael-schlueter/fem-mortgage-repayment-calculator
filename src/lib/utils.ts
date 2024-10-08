@@ -11,6 +11,10 @@ export function calculateMonthlyRepayment(
   mortgageTerm: number,
   mortgageRate: number
 ) {
+  if (mortgageAmount <= 0 || mortgageTerm <= 0 || mortgageRate < 0) {
+    throw new Error("Invalid input values");
+  }
+
   if (mortgageRate === 0) {
     return mortgageAmount / (mortgageTerm * 12);
   }
@@ -29,6 +33,10 @@ export function calculateTotalRepayment(
   mortgageTerm: number,
   mortgageRate: number
 ) {
+  if (mortgageAmount <= 0 || mortgageTerm <= 0 || mortgageRate < 0) {
+    throw new Error("Invalid input values");
+  }
+
   if (mortgageRate === 0) {
     return mortgageAmount;
   }
@@ -44,16 +52,24 @@ export function calculateMonthlyInterestPayment(
   mortgageAmount: number,
   mortgageRate: number
 ): number {
+  if (mortgageAmount <= 0 || mortgageRate < 0) {
+    throw new Error("Invalid input values");
+  }
+
   const monthlyInterestRate = mortgageRate / 12 / 100;
   const monthlyInterestPayment = mortgageAmount * monthlyInterestRate;
   return monthlyInterestPayment;
 }
 
-export function calculateTotalInterestRepayment(
+export function calculateTotalInterestPayment(
   mortgageAmount: number,
   mortgageTerm: number,
   mortgageRate: number
 ): number {
+  if (mortgageAmount <= 0 || mortgageTerm <= 0 || mortgageRate < 0) {
+    throw new Error("Invalid input values");
+  }
+
   const monthlyInterestPayment = calculateMonthlyInterestPayment(
     mortgageAmount,
     mortgageRate

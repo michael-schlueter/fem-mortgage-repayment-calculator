@@ -5,7 +5,7 @@ import MortgageTypeRadioGroup from "./RadioGroup";
 import {
   calculateMonthlyInterestPayment,
   calculateMonthlyRepayment,
-  calculateTotalInterestRepayment,
+  calculateTotalInterestPayment,
   calculateTotalRepayment,
 } from "../lib/utils";
 
@@ -36,7 +36,8 @@ export default function MortgageCalculator({
       mortgageRate === "" ||
       mortgageType === "" ||
       parseFloat(mortgageAmount) === 0 ||
-      parseFloat(mortgageTerm) === 0
+      parseFloat(mortgageTerm) === 0 ||
+      parseFloat(mortgageRate) === 0
     ) {
       if (mortgageAmount === "") {
         setMortgageAmountError("This field is required");
@@ -58,6 +59,10 @@ export default function MortgageCalculator({
 
       if (parseFloat(mortgageTerm) === 0) {
         setMortageTermError("Must be greater than zero");
+      }
+
+      if (parseFloat(mortgageRate) === 0) {
+        setMortgageRateError("Must be greater than zero");
       }
       return;
     }
@@ -83,7 +88,7 @@ export default function MortgageCalculator({
         parseFloat(mortgageAmount),
         parseFloat(mortgageRate)
       );
-      const totalInterestPayment = calculateTotalInterestRepayment(
+      const totalInterestPayment = calculateTotalInterestPayment(
         parseFloat(mortgageAmount),
         parseFloat(mortgageTerm),
         parseFloat(mortgageRate)
