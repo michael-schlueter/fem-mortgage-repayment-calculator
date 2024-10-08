@@ -24,7 +24,7 @@ export default function MortgageCalculator({
   const [mortgageTermError, setMortgageTermError] = useState("");
   const [mortgageRate, setMortgageRate] = useState("");
   const [mortgageRateError, setMortgageRateError] = useState("");
-  const [mortgageType, setMortgageType] = useState("");
+  const [mortgageType, setMortgageType] = useState<"repayment" | "interest-only" | "">("");
   const [mortgageTypeError, setMortgageTypeError] = useState("");
   const [resultsAnnouncement, setResultsAnnouncement] = useState("");
 

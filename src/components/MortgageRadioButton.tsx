@@ -1,8 +1,10 @@
 type MortgageRadioButtonProps = {
   mortgageTypeId: "repayment" | "interest-only";
   label: "Repayment" | "Interest Only";
-  mortgageType: string;
-  setMortgageType: React.Dispatch<React.SetStateAction<string>>;
+  mortgageType: "repayment" | "interest-only" | "";
+  setMortgageType: React.Dispatch<
+    React.SetStateAction<"repayment" | "interest-only" | "">
+  >;
   setMortgageTypeError: React.Dispatch<React.SetStateAction<string>>;
   errorId: string;
 };
@@ -16,7 +18,7 @@ export default function MortgageRadioButton({
   setMortgageTypeError,
 }: MortgageRadioButtonProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setMortgageType(e.target.value);
+    setMortgageType(e.target.value as "repayment" | "interest-only");
     setMortgageTypeError("");
   };
   return (
@@ -34,7 +36,9 @@ export default function MortgageRadioButton({
         onChange={handleChange}
         checked={mortgageType === mortgageTypeId}
       />
-      <span id={mortgageTypeId} className="text-slate-900 text-lg font-bold">{label}</span>
+      <span id={mortgageTypeId} className="text-slate-900 text-lg font-bold">
+        {label}
+      </span>
     </label>
   );
 }

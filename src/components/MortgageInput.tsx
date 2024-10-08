@@ -25,12 +25,8 @@ export default function MortgageInput({
   const [isFocused, setIsFocused] = useState(false);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (
-      event.key === "e" ||
-      event.key === "E" ||
-      event.key === "+" ||
-      event.key === "-"
-    ) {
+    const invalidKeys = ["e", "E", "+", "-"];
+    if (invalidKeys.includes(event.key)) {
       event.preventDefault();
     }
   };
