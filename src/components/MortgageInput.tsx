@@ -9,6 +9,7 @@ type MortgageInputProps = {
   setValue: React.Dispatch<React.SetStateAction<string>>;
   resetError: React.Dispatch<React.SetStateAction<string>>;
   error?: string;
+  errorId: string;
 };
 
 export default function MortgageInput({
@@ -19,14 +20,20 @@ export default function MortgageInput({
   setValue,
   resetError,
   error,
+  errorId,
 }: MortgageInputProps) {
   const [isFocused, setIsFocused] = useState(false);
 
   const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'e' || event.key === 'E' || event.key === '+' || event.key === '-') {
+    if (
+      event.key === "e" ||
+      event.key === "E" ||
+      event.key === "+" ||
+      event.key === "-"
+    ) {
       event.preventDefault();
     }
-  }
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
@@ -38,7 +45,7 @@ export default function MortgageInput({
   const handleFocus = () => {
     setIsFocused(true);
     resetError("");
-  }
+  };
 
   return (
     <div
@@ -71,6 +78,7 @@ export default function MortgageInput({
             id={id}
             onFocus={handleFocus}
             onBlur={() => setIsFocused(false)}
+            aria-describedby={errorId}
             onChange={handleChange}
             onKeyDown={handleKeyDown}
             className="flex-grow px-4 py-[12.5px] text-lg font-bold text-slate-900 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"

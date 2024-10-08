@@ -21,6 +21,7 @@ export default function MortgageTypeRadioGroup({
       <MortgageRadioButton
         mortgageTypeId="repayment"
         label="Repayment"
+        errorId="mortgageTypeError"
         mortgageType={mortgageType}
         setMortgageType={setMortgageType}
         setMortgageTypeError={setMortgageTypeError}
@@ -28,12 +29,13 @@ export default function MortgageTypeRadioGroup({
       <MortgageRadioButton
         mortgageTypeId="interest-only"
         label="Interest Only"
+        errorId="mortgageTypeError"
         mortgageType={mortgageType}
         setMortgageType={setMortgageType}
         setMortgageTypeError={setMortgageTypeError}
       />
       {mortgageTypeError && (
-        <p className="text-sm text-red">{mortgageTypeError}</p>
+        <span role="alert" id="mortgageTypeError" className="text-sm text-red">{mortgageTypeError}</span>
       )}
     </fieldset>
   );

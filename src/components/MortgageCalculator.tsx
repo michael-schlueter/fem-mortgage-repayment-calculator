@@ -118,9 +118,10 @@ export default function MortgageCalculator({
             setValue={setMortgageAmount}
             resetError={setMortgageAmountError}
             error={mortgageAmountError}
+            errorId="mortgageAmountError"
           />
           {mortgageAmountError && (
-            <p className="text-sm text-red">{mortgageAmountError}</p>
+            <span role="alert" id="mortgageAmountError" className="text-sm text-red">{mortgageAmountError}</span>
           )}
         </div>
         <div className="grid gap-6 md:grid-cols-2">
@@ -136,9 +137,10 @@ export default function MortgageCalculator({
               setValue={setMortageTerm}
               resetError={setMortageTermError}
               error={mortgageTermError}
+              errorId="mortgageTermError"
             />
             {mortgageTermError && (
-              <p className="text-sm text-red">{mortgageTermError}</p>
+              <span role="alert" id="mortgageTermError" className="text-sm text-red">{mortgageTermError}</span>
             )}
           </div>
           <div className="flex flex-col gap-3">
@@ -153,9 +155,10 @@ export default function MortgageCalculator({
               setValue={setMortgageRate}
               resetError={setMortgageRateError}
               error={mortgageRateError}
+              errorId="mortgageRateError"
             />
             {mortgageRateError && (
-              <p className="text-sm text-red">{mortgageRateError}</p>
+              <span role="alert" id="mortgageRateError" className="text-sm text-red">{mortgageRateError}</span>
             )}
           </div>
         </div>
@@ -165,7 +168,7 @@ export default function MortgageCalculator({
           setMortgageTypeError={setMortgageTypeError}
           mortgageTypeError={mortgageTypeError}
         />
-        <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300">
+        <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus:ring-lime">
           <img src="./public/assets/images/icon-calculator.svg" />
           Calculate Payments
         </button>
