@@ -75,8 +75,15 @@ export default function MortgageCalculator({
       setMonthlyPayment(monthlyPayment);
       setTotalPayment(totalRepayment);
     } else {
-      const monthlyInterestPayment = calculateMonthlyInterestPayment(parseFloat(mortgageAmount), parseFloat(mortgageRate));
-      const totalInterestPayment = calculateTotalInterestRepayment(parseFloat(mortgageAmount), parseFloat(mortgageTerm), parseFloat(mortgageRate));
+      const monthlyInterestPayment = calculateMonthlyInterestPayment(
+        parseFloat(mortgageAmount),
+        parseFloat(mortgageRate)
+      );
+      const totalInterestPayment = calculateTotalInterestRepayment(
+        parseFloat(mortgageAmount),
+        parseFloat(mortgageTerm),
+        parseFloat(mortgageRate)
+      );
       setMonthlyPayment(monthlyInterestPayment);
       setTotalPayment(totalInterestPayment);
     }
@@ -87,6 +94,10 @@ export default function MortgageCalculator({
     setMortageTerm("");
     setMortgageRate("");
     setMortgageType("");
+    setMortgageAmountError("");
+    setMortageTermError("");
+    setMortgageRateError("");
+    setMortgageTypeError("");
     setMonthlyPayment(0);
     setTotalPayment(0);
   };
