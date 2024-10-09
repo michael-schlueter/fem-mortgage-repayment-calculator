@@ -14,7 +14,7 @@ function App() {
           setTotalPayment={setTotalPayment}
         />
         <div className="w-full bg-transparent lg:bg-white lg:rounded-e-3xl">
-          <div className="w-full h-full bg-slate-900 py-8 px-6 md:rounded-b-3xl lg:rounded-none lg:rounded-e-3xl lg:rounded-es-[80px] md:p-10">
+          <div className="w-full h-full bg-slate-900 lg:flex lg:items-center py-8 px-6 md:rounded-b-3xl lg:rounded-none lg:rounded-e-3xl lg:rounded-es-[80px] md:p-10">
             <MortgageResults
               monthlyPayment={monthlyPayment}
               totalPayment={totalPayment}

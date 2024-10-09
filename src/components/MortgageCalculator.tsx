@@ -208,9 +208,9 @@ export default function MortgageCalculator({
         <div className="sr-only" aria-live="polite" data-testid="results-announcement">
           {resultsAnnouncement}
         </div>
-        <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus:ring-lime">
+        <button className="h-14 text-slate-900 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus:ring-lime">
           <img src="./assets/images/icon-calculator.svg" />
-          Calculate Payments
+          Calculate Repayments
         </button>
       </form>
     </section>
