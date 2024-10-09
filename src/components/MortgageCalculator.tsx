@@ -209,7 +209,7 @@ export default function MortgageCalculator({
           {resultsAnnouncement}
         </div>
         <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus:ring-lime">
-          <img src="./public/assets/images/icon-calculator.svg" />
+          <img src="./assets/images/icon-calculator.svg" />
           Calculate Payments
         </button>
       </form>
