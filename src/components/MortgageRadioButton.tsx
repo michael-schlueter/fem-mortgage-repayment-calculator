@@ -6,7 +6,7 @@ type MortgageRadioButtonProps = {
     React.SetStateAction<"repayment" | "interest-only" | "">
   >;
   setMortgageTypeError: React.Dispatch<React.SetStateAction<string>>;
-  errorId: string;
+  errorId?: string;
 };
 
 export default function MortgageRadioButton({
