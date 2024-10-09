@@ -55,7 +55,7 @@ export default function MortgageCalculator({
       isValid = false;
     }
     if (parseFloat(mortgageRate) === 0) {
-      setMortgageRateError("Mortgage rate must be greater than zero.");
+      setMortgageRateError("Interest rate must be greater than zero.");
       isValid = false;
     }
 
