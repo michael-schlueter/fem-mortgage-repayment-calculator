@@ -22,7 +22,7 @@ export default function Results({
       <div className="grid py-6 px-4 md:p-8 bg-black/25 rounded-lg border-t-4 border-t-lime">
         <div className="grid gap-2 pb-4 md:pb-8 border-b border-slate-300/25">
           <p className="text-slate-300 text-base">Your monthly payments</p>
-          <span className="text-lime text-2xl font-bold">
+          <span className="text-lime text-2xl font-bold" data-testid="monthly-payment-result">
             {formatCurrency(monthlyPayment)}
           </span>
         </div>
@@ -30,7 +30,7 @@ export default function Results({
           <p className="text-slate-300 text-base">
             Total you'll repay over the term
           </p>
-          <span className="text-white text-xl font-bold">
+          <span className="text-white text-xl font-bold" data-testid="total-payment-result">
             {formatCurrency(totalPayment)}
           </span>
         </div>

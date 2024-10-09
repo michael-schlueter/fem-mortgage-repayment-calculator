@@ -7,6 +7,7 @@ import {
   calculateMonthlyRepayment,
   calculateTotalInterestPayment,
   calculateTotalRepayment,
+  formatCurrency,
 } from "../lib/utils";
 
 type MortgageCalculatorProps = {
@@ -55,7 +56,7 @@ export default function MortgageCalculator({
       isValid = false;
     }
     if (parseFloat(mortgageRate) === 0) {
-      setMortgageRateError("Mortgage rate must be greater than zero.");
+      setMortgageRateError("Interest rate must be greater than zero.");
       isValid = false;
     }
 
@@ -102,7 +103,7 @@ export default function MortgageCalculator({
       setTotalPayment(totalInterestPayment);
 
       setResultsAnnouncement(
-        `The monthly payment is ${monthlyInterestPayment} and the total payment is ${totalInterestPayment}. This is interest-only.`
+        `The monthly payment is ${formatCurrency(monthlyInterestPayment)} and the total payment is ${formatCurrency(totalInterestPayment)}. This is interest-only.`
       );
     }
   };
@@ -204,7 +205,7 @@ export default function MortgageCalculator({
           setMortgageTypeError={setMortgageTypeError}
           mortgageTypeError={mortgageTypeError}
         />
-        <div className="sr-only" aria-live="polite">
+        <div className="sr-only" aria-live="polite" data-testid="results-announcement">
           {resultsAnnouncement}
         </div>
         <button className="h-14 text-lg font-bold bg-lime hover:bg-lime/50 rounded-full flex gap-3 justify-center items-center md:max-w-[314px] transition-colors duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-4 focus:ring-lime">
