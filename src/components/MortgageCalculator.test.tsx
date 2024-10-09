@@ -87,4 +87,35 @@ describe("MortgageCalculator", () => {
     expect(setMonthlyPayment).toHaveBeenCalled();
     expect(setTotalPayment).toHaveBeenCalled();
   });
+
+  test("clears all form fields when 'Clear All' button is clicked", async () => {
+    const user = userEvent.setup();
+    render(
+      <MortgageCalculator
+        setMonthlyPayment={setMonthlyPayment}
+        setTotalPayment={setTotalPayment}
+      />
+    );
+
+    // fills in the form fields
+    const mortgageAmountInput = screen.getByLabelText(/mortgage amount/i);
+    const mortgageTermInput = screen.getByLabelText(/mortgage term/i);
+    const mortgageRateInput = screen.getByLabelText(/interest rate/i);
+    const repaymentRadioButton = screen.getByLabelText(/repayment/i);
+
+    await user.type(mortgageAmountInput, "300000");
+    await user.type(mortgageTermInput, "25");
+    await user.type(mortgageRateInput, "5");
+    await user.click(repaymentRadioButton);
+
+    // clicks the 'Clear All' button
+    const clearButton = screen.getByRole("button", { name: /clear all/i });
+    await user.click(clearButton);
+
+    // input fields are cleared
+    expect(mortgageAmountInput).toHaveValue(null);
+    expect(mortgageTermInput).toHaveValue(null);
+    expect(mortgageRateInput).toHaveValue(null);
+    expect(repaymentRadioButton).not.toBeChecked();
+  });
 });
