@@ -49,46 +49,67 @@ test("displays correct results for interest-only mortgage", async () => {
 });
 
 test("displays no results if inputs are invalid", async () => {
-    const user = userEvent.setup();
-    render(<App />);
-  
-    // submits the form
-    const submitFormBtn = screen.getByRole("button", {
-      name: /calculate payments/i,
-    });
-    await user.click(submitFormBtn);
-  
-    // no results are displayed
-    const monthlyPaymentResult = screen.queryByTestId("monthly-payment-result");
-    const totalPaymentResult = screen.queryByTestId("total-payment-result");
-    expect(monthlyPaymentResult).not.toBeInTheDocument();
-    expect(totalPaymentResult).not.toBeInTheDocument();
+  const user = userEvent.setup();
+  render(<App />);
+
+  // submits the form
+  const submitFormBtn = screen.getByRole("button", {
+    name: /calculate payments/i,
   });
+  await user.click(submitFormBtn);
+
+  // no results are displayed
+  const monthlyPaymentResult = screen.queryByTestId("monthly-payment-result");
+  const totalPaymentResult = screen.queryByTestId("total-payment-result");
+  expect(monthlyPaymentResult).not.toBeInTheDocument();
+  expect(totalPaymentResult).not.toBeInTheDocument();
+});
 
 test("displays no results after clearing the form inputs", async () => {
-    const user = userEvent.setup();
-    render(<App />);
+  const user = userEvent.setup();
+  render(<App />);
 
-    // fills in the form fields
-    const mortgageAmountInput = screen.getByLabelText(/mortgage amount/i);
-    const mortgageTermInput = screen.getByLabelText(/mortgage term/i);
-    const mortgageRateInput = screen.getByLabelText(/interest rate/i);
-    const repaymentRadioButton = screen.getByLabelText(/repayment/i);
+  // fills in the form fields
+  const mortgageAmountInput = screen.getByLabelText(/mortgage amount/i);
+  const mortgageTermInput = screen.getByLabelText(/mortgage term/i);
+  const mortgageRateInput = screen.getByLabelText(/interest rate/i);
+  const repaymentRadioButton = screen.getByLabelText(/repayment/i);
 
-    await user.type(mortgageAmountInput, "300000");
-    await user.type(mortgageTermInput, "25");
-    await user.type(mortgageRateInput, "5");
-    await user.click(repaymentRadioButton);
+  await user.type(mortgageAmountInput, "300000");
+  await user.type(mortgageTermInput, "25");
+  await user.type(mortgageRateInput, "5");
+  await user.click(repaymentRadioButton);
 
-    // clicks the 'Clear All' button
-    const clearButton = screen.getByRole("button", { name: /clear all/i });
-    await user.click(clearButton);
+  // clicks the 'Clear All' button
+  const clearButton = screen.getByRole("button", { name: /clear all/i });
+  await user.click(clearButton);
 
-    // no results are displayed
-    const monthlyPaymentResult = screen.queryByTestId("monthly-payment-result");
-    const totalPaymentResult = screen.queryByTestId("total-payment-result");
-    expect(monthlyPaymentResult).not.toBeInTheDocument();
-    expect(totalPaymentResult).not.toBeInTheDocument();
+  // no results are displayed
+  const monthlyPaymentResult = screen.queryByTestId("monthly-payment-result");
+  const totalPaymentResult = screen.queryByTestId("total-payment-result");
+  expect(monthlyPaymentResult).not.toBeInTheDocument();
+  expect(totalPaymentResult).not.toBeInTheDocument();
+});
+
+test("screen reader correctly announces results", async () => {
+  const user = userEvent.setup();
+  render(<App />);
+
+  // fills out the form
+  await user.type(screen.getByLabelText(/mortgage amount/i), "300000");
+  await user.type(screen.getByLabelText(/mortgage term/i), "25");
+  await user.type(screen.getByLabelText(/interest rate/i), "5.25");
+  await userEvent.click(screen.getByLabelText(/interest only/i));
+
+  // submits the form
+  const submitFormBtn = screen.getByRole("button", {
+    name: /calculate payments/i,
   });
+  await user.click(submitFormBtn);
 
-
+  // screen reader announcement is correct
+  const srAnnouncement = screen.getByTestId("results-announcement");
+  expect(srAnnouncement).toHaveTextContent(
+    "The monthly payment is £1,312.50 and the total payment is £393,750.00. This is interest-only."
+  );
+});
